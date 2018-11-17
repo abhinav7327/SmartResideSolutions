@@ -15,6 +15,10 @@ import com.smartresidesolutions.common.RetrofitClient;
 
 
 import com.smartresidesolutions.model.User;
+import com.smartresidesolutions.model.UserMenu;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,13 +63,9 @@ public class LoginActivity extends AppCompatActivity {
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User>call, Response<User> response) {
-                        User User = response.body();
-                        if(User.getUsername().equals("abhinav")){
-                            navigateActivity(1);
-                        }
-                        else{
-                            loginResponse=0;
-                        }
+                        User user = response.body();
+                        sendUserDetails(user);
+
 
                     }
 
@@ -94,11 +94,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    void  navigateActivity(int loginResponse){
-        if(loginResponse==1) {
-            Intent activityChangeIntent = new Intent(getApplicationContext(), Navigation.class);
-            startActivity(activityChangeIntent);
-        }
+    private void sendUserDetails(User user) {
+
+        Intent navigationIntent = new Intent(getApplicationContext(), Navigation.class);
+        navigationIntent.putExtra("userLoginData",user);
+        startActivity(navigationIntent);
     }
+
 }
 
