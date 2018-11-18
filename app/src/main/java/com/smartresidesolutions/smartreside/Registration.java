@@ -125,7 +125,7 @@ Button submitButton;
                     LoginApiInterface apiService =
                             RetrofitClient.getClient().create(LoginApiInterface.class);
 
-                    Register register = new Register(registerFirstName.getText().toString(),registerLastName.getText().toString(), registerEmail.getText().toString(), registerMobile.getText().toString(), registerDob.getText().toString(), registerKycNumber.getText().toString(), registerKycType.getSelectedItem().toString(), registerGenderType.getSelectedItem().toString());
+                    Register register = new Register(registerFirstName.getText().toString(),registerLastName.getText().toString(),registerDob.getText().toString(), registerEmail.getText().toString(), registerMobile.getText().toString(), registerGenderType.getSelectedItem().toString(),registerKycType.getSelectedItem().toString(),registerKycNumber.getText().toString(),registerConfirmPassword.getText().toString());
                     Call<Register> call = apiService.registerUser(register);
 
 

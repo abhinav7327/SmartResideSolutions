@@ -12,17 +12,18 @@ public class Register implements Serializable {
     String kycNumber;
     String kycType;
     String gender;
+    String password;
 
-    public Register(String firstName,String lastName, String email, String mobile, String birthdate, String kycNumber, String kycType, String gender) {
+    public Register(String firstName,String lastName, String birthdate, String email, String mobile, String gender, String kycType,String kycNumber,String password) {
         this.firstName = firstName;
         this.lastName=lastName;
+        this.birthdate = birthdate;
         this.email = email;
         this.mobile = mobile;
-        this.birthdate = birthdate;
-        this.kycNumber = kycNumber;
-        this.kycNumber = kycNumber;
-        this.kycType = kycType;
         this.gender = gender;
+        this.kycType = kycType;
+        this.kycNumber = kycNumber;
+        this.password=password;
     }
 
     public String getFirstName() {
@@ -31,6 +32,14 @@ public class Register implements Serializable {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setFirstName(String firstName) {
