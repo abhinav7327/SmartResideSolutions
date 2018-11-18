@@ -15,9 +15,11 @@ public interface LoginApiInterface {
     /*@GET("/api/unknown")
     Call<LoginBean> doGetListResources();*/
 
-    @GET("/Services/login.json")
-    Call<User> getUser();
+    @POST("/examples/login.json")
+    Call<User> getUser(@Body User user);
 
+    //@GET("/examples/register")
+    //Call<User> registerUser(@body user);
     /*@GET("/api/users?")
     Call<UserList> doGetUserList(@Query("page") String page);
 
