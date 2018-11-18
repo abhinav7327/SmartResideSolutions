@@ -65,8 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<User>call, Response<User> response) {
                         User user = response.body();
                         sendUserDetails(user);
-
-
                     }
 
                     @Override
