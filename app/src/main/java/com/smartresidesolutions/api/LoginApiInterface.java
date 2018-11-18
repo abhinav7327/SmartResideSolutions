@@ -1,5 +1,6 @@
 package com.smartresidesolutions.api;
 
+import com.smartresidesolutions.model.Register;
 import com.smartresidesolutions.model.User;
 
 import retrofit2.Call;
@@ -18,6 +19,8 @@ public interface LoginApiInterface {
     @POST("/examples/login.json")
     Call<User> getUser(@Body User user);
 
+    @POST("/examples/register.json")
+    Call<Register> registerUser(@Body Register register);
     //@GET("/examples/register")
     //Call<User> registerUser(@body user);
     /*@GET("/api/users?")

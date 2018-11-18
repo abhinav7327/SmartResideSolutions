@@ -4,7 +4,8 @@ package com.smartresidesolutions.model;
 import java.io.Serializable;
 
 public class Register implements Serializable {
-    String name;
+    String firstName;
+    String lastName;
     String email;
     String mobile;
     String birthdate;
@@ -12,8 +13,9 @@ public class Register implements Serializable {
     String kycType;
     String gender;
 
-    public Register(String name, String email, String mobile, String birthdate, String kycNumber, String kycType, String gender) {
-        this.name = name;
+    public Register(String firstName,String lastName, String email, String mobile, String birthdate, String kycNumber, String kycType, String gender) {
+        this.firstName = firstName;
+        this.lastName=lastName;
         this.email = email;
         this.mobile = mobile;
         this.birthdate = birthdate;
@@ -23,12 +25,20 @@ public class Register implements Serializable {
         this.gender = gender;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
