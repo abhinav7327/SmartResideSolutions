@@ -1,17 +1,25 @@
 package com.smartresidesolutions.smartreside;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.smartresidesolutions.api.LoginApiInterface;
@@ -39,9 +47,12 @@ private EditText registerSetPassword;
 private EditText registerConfirmPassword;
 private Spinner registerKycType;
 private Spinner registerGenderType;
-
-    DatePickerDialog datePickerDialogdob;
+Button closePopupBtn;
+PopupWindow popupWindow;
+DatePickerDialog datePickerDialogdob;
 Button submitButton;
+RelativeLayout registrationLayout;
+TextView popupText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,11 +128,16 @@ Button submitButton;
 
         // Submit button code//
         submitButton = (Button) findViewById(R.id.register_submit_button);
+        registrationLayout = (RelativeLayout) findViewById(R.id.RegistrationLayout);
+        popupText =  (TextView) findViewById(R.id.popup_textView);
+
         submitButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
                 if (validationRegistration() == true) {
+
+
                     LoginApiInterface apiService =
                             RetrofitClient.getClient().create(LoginApiInterface.class);
 
@@ -131,9 +147,35 @@ Button submitButton;
 
                     call.enqueue(new Callback<Register>() {
                         @Override
-                        public void onResponse(Call<Register> call, Response<Register> response) {
-                            Register register = response.body();
-                            sendUserDetails(register);
+                        public void onResponse(Call<Register> call, final Response<Register> response) {
+
+                            //Review- abhinav if final is ok and remove this comment
+                            final Register register = response.body();
+
+                            //popup code
+                            LayoutInflater layoutInflater = (LayoutInflater) Registration.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            View customView = layoutInflater.inflate(R.layout.activity_popup,null);
+
+                            closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
+
+                            //instantiate popup window
+                            popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                            //display the popup window
+                            popupWindow.showAtLocation(registrationLayout, Gravity.CENTER, 0, 0);
+                           // popupText.setText("Hi, "+registerFirstName.getText().toString()+", Registration Successful");
+                            //close the popup window on button click
+                            closePopupBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    popupWindow.dismiss();
+
+                                    sendUserDetails(register);
+                                }
+
+                            });
+                            //popup code
+                             //sendUserDetails(register);
                         }
 
                         @Override
