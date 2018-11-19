@@ -129,7 +129,9 @@ TextView popupText;
         // Submit button code//
         submitButton = (Button) findViewById(R.id.register_submit_button);
         registrationLayout = (RelativeLayout) findViewById(R.id.RegistrationLayout);
-        popupText =  (TextView) findViewById(R.id.popup_textView);
+
+
+
 
         submitButton.setOnClickListener(new View.OnClickListener(){
 
@@ -157,13 +159,13 @@ TextView popupText;
                             View customView = layoutInflater.inflate(R.layout.activity_popup,null);
 
                             closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);
-
+                            popupText =  (TextView) customView.findViewById(R.id.popup_textView);
                             //instantiate popup window
                             popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
+                             popupText.setText("Hey "+registerFirstName.getText().toString()+", Registration Successful");
                             //display the popup window
                             popupWindow.showAtLocation(registrationLayout, Gravity.CENTER, 0, 0);
-                           // popupText.setText("Hi, "+registerFirstName.getText().toString()+", Registration Successful");
+
                             //close the popup window on button click
                             closePopupBtn.setOnClickListener(new View.OnClickListener() {
                                 @Override
