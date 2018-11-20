@@ -2,19 +2,20 @@ package com.smartresidesolutions.model;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Register implements Serializable {
     String firstName;
     String lastName;
     String email;
     String mobile;
-    String birthdate;
+    Date birthdate;
     String kycNumber;
     String kycType;
     String gender;
     String password;
 
-    public Register(String firstName,String lastName, String birthdate, String email, String mobile, String gender, String kycType,String kycNumber,String password) {
+    public Register(String firstName,String lastName, Date birthdate, String email, String mobile, String gender, String kycType,String kycNumber,String password) {
         this.firstName = firstName;
         this.lastName=lastName;
         this.birthdate = birthdate;
@@ -66,11 +67,11 @@ public class Register implements Serializable {
         this.mobile = mobile;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
