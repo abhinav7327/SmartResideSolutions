@@ -15,7 +15,8 @@ public class Register implements Serializable {
     String gender;
     String password;
 
-    public Register(String firstName,String lastName, Date birthdate, String email, String mobile, String gender, String kycType,String kycNumber,String password) {
+    //Abhinav review this and delete this comment if correct - I created Register constructor with empty paramater
+   /* public Register(String firstName,String lastName, Date birthdate, String email, String mobile, String gender, String kycType,String kycNumber,String password) {
         this.firstName = firstName;
         this.lastName=lastName;
         this.birthdate = birthdate;
@@ -26,6 +27,8 @@ public class Register implements Serializable {
         this.kycNumber = kycNumber;
         this.password=password;
     }
+*/
+   public Register(){}
 
     public String getFirstName() {
         return firstName;

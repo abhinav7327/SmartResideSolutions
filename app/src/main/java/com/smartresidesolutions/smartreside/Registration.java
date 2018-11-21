@@ -27,7 +27,10 @@ import com.smartresidesolutions.common.RetrofitClient;
 import com.smartresidesolutions.model.Register;
 import com.smartresidesolutions.model.User;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,6 +56,7 @@ DatePickerDialog datePickerDialogdob;
 Button submitButton;
 RelativeLayout registrationLayout;
 TextView popupText;
+Date birthDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +147,26 @@ TextView popupText;
                     LoginApiInterface apiService =
                             RetrofitClient.getClient().create(LoginApiInterface.class);
 
-                    Register register = new Register(registerFirstName.getText().toString(),registerLastName.getText().toString(),registerDob.getText().toString(), registerEmail.getText().toString(), registerMobile.getText().toString(), registerGenderType.getSelectedItem().toString(),registerKycType.getSelectedItem().toString(),registerKycNumber.getText().toString(),registerConfirmPassword.getText().toString());
+                    String dobDate = registerDob.getText().toString();
+                    try {
+                        birthDate=new SimpleDateFormat("dd/MM/yyyy").parse(dobDate);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    //Abhinav review this and delete comment if correctly changed as discussed on call
+                    //Register register = new Register(registerFirstName.getText().toString(),registerLastName.getText().toString(),birthDate, registerEmail.getText().toString(), registerMobile.getText().toString(), registerGenderType.getSelectedItem().toString(),registerKycType.getSelectedItem().toString(),registerKycNumber.getText().toString(),registerConfirmPassword.getText().toString());
+                    Register register = new Register();
+                    register.setFirstName(registerFirstName.getText().toString());
+                    register.setLastName(registerLastName.getText().toString());
+                    register.setBirthdate(birthDate);
+                    register.setEmail(registerEmail.getText().toString());
+                    register.setMobile(registerMobile.getText().toString());
+                    register.setGender(registerGenderType.getSelectedItem().toString());
+                    register.setKycType(registerKycType.getSelectedItem().toString());
+                    register.setKycNumber(registerKycNumber.getText().toString());
+                    register.setPassword(registerConfirmPassword.getText().toString());
+
                     Call<Register> call = apiService.registerUser(register);
 
 
@@ -199,7 +222,7 @@ TextView popupText;
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        registerDob.setText(year+"/"+(month+1)+"/"+dayOfMonth);
+        registerDob.setText(dayOfMonth+"/"+(month+1)+"/"+year);
     }
 
 
